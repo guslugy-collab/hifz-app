@@ -407,7 +407,9 @@ button:hover { background: #3b372e; border-color: var(--accent); }
 #wordTooltip {
   position: fixed;
   z-index: 50;
-  max-width: 280px;
+  max-width: min(280px, calc(100vw - 16px));
+  max-height: calc(100vh - 16px);
+  overflow-y: auto;
   background: #2f2c26;
   border: 1px solid var(--accent);
   border-radius: 8px;
@@ -416,9 +418,10 @@ button:hover { background: #3b372e; border-color: var(--accent); }
   direction: ltr;
   text-align: left;
   pointer-events: none;
+  box-sizing: border-box;
 }
 #wordTooltip.hidden { display: none; }
-#wordTooltip.wt-wide { max-width: 320px; }
+#wordTooltip.wt-wide { max-width: min(320px, calc(100vw - 16px)); }
 #wordTooltip .wt-ar {
   direction: rtl;
   font-size: 22px;

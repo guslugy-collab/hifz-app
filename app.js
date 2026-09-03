@@ -182,13 +182,17 @@ function showTooltip(span, x, y) {
   wordTooltip.classList.remove('hidden');
   wordTooltip.classList.toggle('wt-wide', !!(grammar && grammarHtml(grammar)));
   const pad = 14;
-  const tw = grammar ? 320 : 300;
+  const margin = 8;
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const tw = Math.min(grammar ? 320 : 300, vw - margin * 2);
+  const th = Math.min(grammar ? 260 : 140, vh - margin * 2);
   let left = x + pad;
   let top = y + pad;
-  const maxLeft = window.innerWidth - tw;
-  const maxTop = window.innerHeight - 220;
-  if (left > maxLeft) left = x - tw;
-  if (top > maxTop) top = Math.max(10, y - 220);
+  if (left + tw > vw - margin) left = x - tw - pad;
+  if (top + th > vh - margin) top = y - th - pad;
+  left = Math.min(Math.max(left, margin), vw - tw - margin);
+  top = Math.min(Math.max(top, margin), vh - th - margin);
   wordTooltip.style.left = left + 'px';
   wordTooltip.style.top = top + 'px';
 }
