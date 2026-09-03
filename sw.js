@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'hifz-v1';
+const CACHE_VERSION = 'hifz-v2';
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const IMAGES_CACHE = `${CACHE_VERSION}-images`;
 
@@ -11,6 +11,7 @@ const SHELL_FILES = [
   './data/data.js',
   './data/wordByWord.js',
   './data/pagesList.js',
+  './data/azkar.js',
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/apple-touch-icon.png',
@@ -41,21 +42,39 @@ self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET' || url.origin !== self.location.origin) return;
 
   const isImage = url.pathname.includes('/pages/');
-  const cacheName = isImage ? IMAGES_CACHE : SHELL_CACHE;
 
-  event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) return cached;
-      return fetch(event.request)
-        .then((response) => {
+  if (isImage) {
+    // Page scans never change once published: cache-first keeps them fast
+    // and available offline without re-downloading 269MB every visit.
+    event.respondWith(
+      caches.match(event.request).then((cached) => {
+        if (cached) return cached;
+        return fetch(event.request).then((response) => {
           if (response.ok) {
             const copy = response.clone();
-            caches.open(cacheName).then((cache) => cache.put(event.request, copy));
+            caches.open(IMAGES_CACHE).then((cache) => cache.put(event.request, copy));
           }
           return response;
-        })
-        .catch(() => cached);
-    })
+        });
+      })
+    );
+    return;
+  }
+
+  // App shell (HTML/CSS/JS/data): network-first. Whenever the device is
+  // online, visitors always get the latest published version straight away
+  // -- no need to reshare the link after an update. The cached copy is only
+  // used as a fallback when there is genuinely no connection.
+  event.respondWith(
+    fetch(event.request)
+      .then((response) => {
+        if (response.ok) {
+          const copy = response.clone();
+          caches.open(SHELL_CACHE).then((cache) => cache.put(event.request, copy));
+        }
+        return response;
+      })
+      .catch(() => caches.match(event.request))
   );
 });
 
