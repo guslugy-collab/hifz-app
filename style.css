@@ -176,6 +176,42 @@ html, body {
   line-height: 1.5;
 }
 
+.azkar-hadith {
+  margin-bottom: 14px;
+  font-size: 13px;
+}
+.azkar-hadith summary {
+  cursor: pointer;
+  color: #8ecbe6;
+  font-size: 12px;
+  user-select: none;
+}
+.azkar-hadith summary:hover { text-decoration: underline; }
+.azkar-hadith .hadith-ar {
+  direction: rtl;
+  text-align: right;
+  font-family: "Traditional Arabic", "Scheherazade New", "Amiri", serif;
+  font-size: 19px;
+  line-height: 1.8;
+  color: var(--text);
+  margin: 8px 0 0;
+  padding: 10px 12px;
+  background: #1e2a30;
+  border-right: 2px solid #6fb3d2;
+  border-radius: 4px;
+}
+.azkar-hadith p {
+  direction: ltr;
+  text-align: left;
+  margin: 8px 0 0;
+  padding: 10px 12px;
+  background: #1e2a30;
+  border-left: 2px solid #6fb3d2;
+  border-radius: 4px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
 .azkar-footer {
   display: flex;
   align-items: center;

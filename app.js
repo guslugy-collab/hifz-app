@@ -387,6 +387,11 @@ function renderAzkarList() {
         <summary>Довод (источник хадиса)</summary>
         <p>${it.source}</p>
       </details>
+      <details class="azkar-hadith">
+        <summary>Текст хадиса</summary>
+        ${it.hadithAr ? `<div class="hadith-ar">${it.hadithAr}</div>` : ''}
+        <p>${it.hadithRu}</p>
+      </details>
       <div class="azkar-footer">
         <span class="azkar-count-label">${it.countLabel}</span>
         <div class="azkar-counter">
