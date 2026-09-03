@@ -59,7 +59,7 @@ function renderWords(mushafPage) {
   wordsView.innerHTML = '';
   const note = document.createElement('div');
   note.className = 'wbw-note';
-  note.textContent = 'Пословный перевод приблизительный (в основном машинный). Для точного смысла аята — перевод справа.';
+  note.textContent = 'Пословный перевод приблизительный (в основном машинный) и не заменяет смысловой перевод аята — см. справа. Точный смысл аятов Корана знает только Аллах.';
   wordsView.appendChild(note);
   if (!words || words.length === 0) {
     wordsView.innerHTML += '<div class="empty-note">Пословный разбор недоступен для этой страницы.</div>';

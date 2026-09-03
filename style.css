@@ -449,6 +449,16 @@ button:hover { background: #3b372e; border-color: var(--accent); }
 }
 #translationPanel.hidden { display: none; }
 
+.meaning-note {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--muted);
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.4;
+}
+
 #translationHeader {
   font-size: 13px;
   color: var(--accent);
