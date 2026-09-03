@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Хифз — Коран с переводом</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1b1a17">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Хифз">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="homeScreen">
+  <div class="home-star"></div>
+  <h1>Хифз</h1>
+  <p class="home-sub">Коран с переводом и утренние/вечерние азкары</p>
+  <div class="home-cards">
+    <button id="goQuran" class="home-card">
+      <span class="home-card-title">Читать Коран</span>
+      <span class="home-card-desc">Страницы мусхафа, перевод, пословный разбор</span>
+    </button>
+    <button id="goAzkar" class="home-card">
+      <span class="home-card-title">Азкары</span>
+      <span class="home-card-desc">Утренние и вечерние поминания со счётчиком</span>
+    </button>
+  </div>
+</div>
+
+<div id="quranApp" class="hidden">
+<header id="toolbar">
+  <div class="toolbar-group">
+    <button id="homeBtn1" class="home-link" title="На главный экран">🏠</button>
+    <button id="prevBtn" title="Предыдущая страница (←)">←</button>
+    <input id="pageInput" type="number" min="1" max="604" value="1">
+    <span class="of">из 604</span>
+    <button id="nextBtn" title="Следующая страница (→)">→</button>
+  </div>
+
+  <div class="toolbar-group">
+    <select id="surahSelect"></select>
+  </div>
+
+  <div class="toolbar-group">
+    <button id="zoomOut" title="Уменьшить">−</button>
+    <button id="zoomIn" title="Увеличить">+</button>
+    <button id="toggleWords" title="Показать/скрыть пословный разбор">Слова</button>
+    <button id="toggleVerbsOnly" title="Выделить/показать только глаголы">Глаголы</button>
+    <button id="toggleTranslation" title="Показать/скрыть перевод">Перевод</button>
+    <button id="offlineBtn" title="Скачать все страницы для работы без интернета">Скачать офлайн</button>
+  </div>
+</header>
+
+<div id="offlineBar" class="hidden">
+  <span id="offlineBarText">Скачивание…</span>
+  <div id="offlineBarTrack"><div id="offlineBarFill"></div></div>
+</div>
+
+<main id="content">
+  <section id="pageView">
+    <div id="wordsView" class="hidden"></div>
+    <img id="pageImg" src="" alt="Страница Корана">
+  </section>
+  <aside id="translationPanel">
+    <div id="translationHeader"></div>
+    <div id="translationList"></div>
+  </aside>
+</main>
+</div>
+
+<div id="azkarApp" class="hidden">
+  <header id="azkarToolbar">
+    <button id="homeBtn2" class="home-link" title="На главный экран">🏠</button>
+    <div class="azkar-tabs">
+      <button id="azkarMorningTab" class="azkar-tab active">Утренние</button>
+      <button id="azkarEveningTab" class="azkar-tab">Вечерние</button>
+    </div>
+  </header>
+  <div id="azkarList"></div>
+</div>
+
+<div id="wordTooltip" class="hidden"></div>
+
+<script src="data/data.js"></script>
+<script src="data/wordByWord.js"></script>
+<script src="data/pagesList.js"></script>
+<script src="data/azkar.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
