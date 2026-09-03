@@ -383,6 +383,10 @@ function renderAzkarList() {
       <div class="azkar-ar">${it.ar}</div>
       <div class="azkar-tr">${it.tr}</div>
       <div class="azkar-ru">${it.ru}</div>
+      <details class="azkar-source">
+        <summary>Довод (источник хадиса)</summary>
+        <p>${it.source}</p>
+      </details>
       <div class="azkar-footer">
         <span class="azkar-count-label">${it.countLabel}</span>
         <div class="azkar-counter">

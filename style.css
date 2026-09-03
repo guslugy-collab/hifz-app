@@ -155,6 +155,27 @@ html, body {
   margin-bottom: 14px;
 }
 
+.azkar-source {
+  margin-bottom: 14px;
+  font-size: 13px;
+}
+.azkar-source summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-size: 12px;
+  user-select: none;
+}
+.azkar-source summary:hover { text-decoration: underline; }
+.azkar-source p {
+  margin: 8px 0 0;
+  padding: 10px 12px;
+  background: #2b2318;
+  border-left: 2px solid var(--accent);
+  border-radius: 4px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
 .azkar-footer {
   display: flex;
   align-items: center;
