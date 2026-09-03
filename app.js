@@ -92,6 +92,7 @@ function renderWords(mushafPage) {
     span.dataset.surah = w.surah;
     span.dataset.ayah = w.ayah;
     if (w.v) span.dataset.verb = '1';
+    if (w.g) span.dataset.grammar = JSON.stringify(w.g);
     wordsView.appendChild(span);
     wordsView.appendChild(document.createTextNode(' '));
   }
@@ -153,24 +154,41 @@ toggleVerbsOnlyBtn.addEventListener('click', () => {
 
 let pinnedWord = null;
 
+function grammarHtml(g) {
+  if (!g) return '';
+  const rows = [];
+  if (g.root) rows.push(`<span class="wg-label">Корень</span><span class="wg-val wg-ar">${g.root}</span>`);
+  if (g.form) rows.push(`<span class="wg-label">Порода</span><span class="wg-val">${g.form}${g.formDesc ? ' — ' + g.formDesc : ''}</span>`);
+  if (g.past) rows.push(`<span class="wg-label">Прош. вр.</span><span class="wg-val wg-ar">${g.past}</span>`);
+  if (g.present) rows.push(`<span class="wg-label">Наст. вр.</span><span class="wg-val wg-ar">${g.present}</span>`);
+  const parseParts = [g.tense, g.person, g.mood, g.passive ? 'страдательный залог' : ''].filter(Boolean);
+  if (parseParts.length) rows.push(`<span class="wg-label">Разбор</span><span class="wg-val">${parseParts.join(', ')}</span>`);
+  if (!rows.length) return '';
+  return `<div class="wt-grammar">${rows.join('')}</div>`;
+}
+
 function showTooltip(span, x, y) {
   const ru = span.dataset.ru || '(нет перевода)';
   const tr = span.dataset.tr;
   const isVerb = span.dataset.verb === '1';
+  const grammar = span.dataset.grammar ? JSON.parse(span.dataset.grammar) : null;
   wordTooltip.innerHTML = `
     <div class="wt-ar">${span.dataset.ar}</div>
     ${isVerb ? '<div class="wt-pos">глагол</div>' : ''}
     <div class="wt-ru">${ru}</div>
     ${tr ? `<div class="wt-tr">${tr}</div>` : ''}
+    ${grammarHtml(grammar)}
   `;
   wordTooltip.classList.remove('hidden');
+  wordTooltip.classList.toggle('wt-wide', !!(grammar && grammarHtml(grammar)));
   const pad = 14;
+  const tw = grammar ? 320 : 300;
   let left = x + pad;
   let top = y + pad;
-  const maxLeft = window.innerWidth - 300;
-  const maxTop = window.innerHeight - 120;
-  if (left > maxLeft) left = x - 300;
-  if (top > maxTop) top = y - 120;
+  const maxLeft = window.innerWidth - tw;
+  const maxTop = window.innerHeight - 220;
+  if (left > maxLeft) left = x - tw;
+  if (top > maxTop) top = Math.max(10, y - 220);
   wordTooltip.style.left = left + 'px';
   wordTooltip.style.top = top + 'px';
 }

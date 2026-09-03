@@ -417,6 +417,7 @@ button:hover { background: #3b372e; border-color: var(--accent); }
   pointer-events: none;
 }
 #wordTooltip.hidden { display: none; }
+#wordTooltip.wt-wide { max-width: 320px; }
 #wordTooltip .wt-ar {
   direction: rtl;
   font-size: 22px;
@@ -437,6 +438,24 @@ button:hover { background: #3b372e; border-color: var(--accent); }
 }
 #wordTooltip .wt-ru { font-size: 15px; font-weight: 600; color: var(--text); }
 #wordTooltip .wt-tr { font-size: 12px; color: var(--muted); font-style: italic; margin-top: 2px; }
+
+#wordTooltip .wt-grammar {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 3px 10px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #4a463b;
+  font-size: 12px;
+}
+#wordTooltip .wg-label { color: #8ecbe6; white-space: nowrap; }
+#wordTooltip .wg-val { color: var(--text); }
+#wordTooltip .wg-val.wg-ar {
+  direction: rtl;
+  text-align: left;
+  font-family: "Traditional Arabic", "Scheherazade New", "Amiri", serif;
+  font-size: 15px;
+}
 
 #translationPanel {
   width: 380px;
