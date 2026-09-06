@@ -88,7 +88,6 @@ function renderWords(mushafPage) {
     span.textContent = w.ar;
     span.dataset.ar = w.ar;
     span.dataset.ru = w.ru || '';
-    span.dataset.tr = w.tr || '';
     span.dataset.surah = w.surah;
     span.dataset.ayah = w.ayah;
     if (w.v) span.dataset.verb = '1';
@@ -168,15 +167,13 @@ function grammarHtml(g) {
 }
 
 function showTooltip(span, x, y) {
-  const ru = span.dataset.ru || '(нет перевода)';
-  const tr = span.dataset.tr;
+  const ru = span.dataset.ru || '(точный перевод пока не проверен)';
   const isVerb = span.dataset.verb === '1';
   const grammar = span.dataset.grammar ? JSON.parse(span.dataset.grammar) : null;
   wordTooltip.innerHTML = `
     <div class="wt-ar">${span.dataset.ar}</div>
     ${isVerb ? '<div class="wt-pos">глагол</div>' : ''}
     <div class="wt-ru">${ru}</div>
-    ${tr ? `<div class="wt-tr">${tr}</div>` : ''}
     ${grammarHtml(grammar)}
   `;
   wordTooltip.classList.remove('hidden');
@@ -403,7 +400,6 @@ function renderAzkarList() {
     if (done) card.classList.add('azkar-done');
     card.innerHTML = `
       <div class="azkar-ar">${it.ar}</div>
-      <div class="azkar-tr">${it.tr}</div>
       <div class="azkar-ru">${it.ru}</div>
       <details class="azkar-source">
         <summary>Довод (источник хадиса)</summary>
